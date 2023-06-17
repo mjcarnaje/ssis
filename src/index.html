@@ -3,10 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hello World!</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src * 'self' data: file:; default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *"
+    />
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div class="modal">
+      <div class="modal-background"></div>
+      <button class="modal-close is-large" aria-label="close"></button>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p id="modalTitle" class="modal-card-title">Modal title</p>
+        </header>
+        <section id="modalContent" class="modal-card-body"></section>
+        <footer id="modalFooter" class="modal-card-foot"></footer>
+      </div>
+    </div>
+
+    <main class="container is-max-desktop">
+      <h1 class="title is-1 is-bold">Students</h1>
+      <button id="add-student" class="button is-primary">Add Student</button>
+      <ul id="student-list" class="my-5"></ul>
+    </main>
   </body>
 </html>
