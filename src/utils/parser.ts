@@ -1,4 +1,4 @@
-function endcode<T>(data: T): string {
+function encode<T>(data: T): string {
   const text = Object.entries(data)
     .map(([key, value]) => `${key}=${value}`.replace("&", ""))
     .join("&");
@@ -14,4 +14,4 @@ function decode<T>(text: string): T {
   return data as T;
 }
 
-export { endcode, decode };
+export { encode, decode };

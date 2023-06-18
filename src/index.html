@@ -2,12 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>
+      Simple Student Information System | SSIS using Text File
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="img-src * 'self' data: file:; default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *"
-    />
+    <meta name="description" content="Simple Student Information System" />
+    <meta name="keywords" content="SSIS, Student Information System" />
+    <link rel="icon" href="./assets/favicon.ico" />
   </head>
   <body>
     <div class="modal">
@@ -23,9 +24,17 @@
     </div>
 
     <main class="container is-max-desktop">
-      <h1 class="title is-1 is-bold">Students</h1>
-      <button id="add-student" class="button is-primary">Add Student</button>
+      <h1 class="title has-text-weight-bold is-uppercase is-1">Students</h1>
+      <div class="buttons">
+        <button id="add-student" class="button is-primary">Add Student</button>
+      </div>
       <ul id="student-list" class="my-5"></ul>
+      <hr style="margin: 5rem 0rem" />
+      <h1 class="title has-text-weight-bold is-uppercase is-1">Colleges</h1>
+      <div class="buttons">
+        <button id="add-college" class="button is-primary">Add College</button>
+      </div>
+      <ul id="college-list" class="my-5"></ul>
     </main>
   </body>
 </html>
