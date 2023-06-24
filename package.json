@@ -1,6 +1,6 @@
 {
-  "name": "ssis-version-1.0",
-  "productName": "SSIS 1.0",
+  "name": "ssis-version-1.0.0",
+  "productName": "SSIS 1.0.0",
   "version": "1.1.0",
   "description": "A simple student information system",
   "main": ".webpack/main",

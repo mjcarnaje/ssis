@@ -16,10 +16,7 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({
-      iconUrl: "src/assets/icons/icon.png",
-      setupIcon: "src/assets/icons/icon.png",
-    }),
+    new MakerSquirrel({}),
     new MakerZIP({}, ["darwin"]),
     new MakerRpm({
       options: {
