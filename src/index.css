@@ -13,3 +13,7 @@
 .is-rounded {
   border-radius: 12px;
 }
+
+.border {
+  border: 1px solid #dbdbdb;
+}

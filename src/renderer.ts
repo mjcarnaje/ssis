@@ -326,7 +326,7 @@ function setCoursesToSelect(courses: ICourse[]) {
   });
 }
 
-function setCollegesToSelect(colleges: ICollege[]) {
+function setCollegesToSelect(colleges: ICollege[], collegeId?: string) {
   const collegeSelect = getElement<HTMLSelectElement>("#collegeId");
   collegeSelect.innerHTML = "";
   collegeSelect.appendChild(createEmptySelect("Select a college"));
@@ -337,13 +337,20 @@ function setCollegesToSelect(colleges: ICollege[]) {
 
     collegeSelect.appendChild(option);
   });
-  setCoursesToSelect([]);
+
+  if (collegeId) {
+    const { courses } = states.colleges.find(
+      (college) => college.id === collegeId
+    );
+    setCoursesToSelect(courses);
+  } else {
+    setCoursesToSelect([]);
+  }
 
   collegeSelect.addEventListener("change", async () => {
-    const collegeId = collegeSelect.value;
-    const courses = states.colleges.find(
-      (college) => college.id === collegeId
-    ).courses;
+    const { courses } = states.colleges.find(
+      (college) => college.id === collegeSelect.value
+    );
     setCoursesToSelect(courses);
   });
 }
@@ -682,9 +689,8 @@ function showEditStudentModal(student: IStudent) {
   });
 
   addPhotoUploadEventListeners();
-  setCollegesToSelect(states.colleges);
+  setCollegesToSelect(states.colleges, student.collegeId);
   setYearsToSelect();
-
   setStudentFormValues(student);
 
   showModal();
@@ -930,7 +936,7 @@ function createStudentTemplate(student: IStudent) {
   const fullName = `${student.firstName} ${student.lastName}`;
 
   const template = `
-  <div class="card">
+  <div class="card border is-rounded">
     <div class="card-content">
       <div class="is-flex is-align-items-center is-justify-content-center mb-5">
         <img class="image is-128x128 is-rounded " style="object-fit: cover; border: 1px solid #ccc;" src="${student.photo}" />
@@ -968,7 +974,7 @@ function createStudentTemplate(student: IStudent) {
 function renderStudents() {
   if (states.students.length === 0) {
     studentList.innerHTML = `
-      <div class="is-flex box is-justify-content-center is-align-items-center">
+      <div class="is-flex py-5 border is-rounded is-justify-content-center is-align-items-center">
         <h1 class="is-size-3">No Students found</h1>
       </div>
     `;
@@ -985,7 +991,7 @@ function renderStudents() {
   states.students.forEach((student) => {
     const studentElement = document.createElement("li");
     studentElement.style.cssText =
-      "flex: 1 1 320px; margin: 5px; max-width: 320px;";
+      "flex: 1 1 280px; margin: 12px; max-width: 320px;";
     studentElement.innerHTML = createStudentTemplate(student);
 
     const updateButton = studentElement.querySelector(".is-primary");
@@ -1018,7 +1024,7 @@ function createCollegeTemplate(college: ICollege, courses: ICourse[]) {
       const { id, name, abbreviation, description } = course;
 
       return `
-      <li class="box py-2 px-5 my-2 is-rounded">
+      <li class="is-rounded border py-2 px-5 my-2 is-rounded">
         <div class="is-flex is-justify-content-space-between">
           <div class="is-flex is-flex-direction-column">
             <h4 class="is-size-4 bold">${name}
@@ -1035,8 +1041,17 @@ function createCollegeTemplate(college: ICollege, courses: ICourse[]) {
     })
     .join("");
 
+  const emptyCourseTemplate = `
+    <div class="border is-rounded py-5 mt-2 is-flex is-justify-content-center is-align-items-center">
+      <h1 class="is-size-3">No Courses found</h1>
+    </div>
+  `;
+
+  const courseFinalTemplate =
+    courses.length === 0 ? emptyCourseTemplate : courseItems;
+
   const template = `
-    <div class="card p-5 my-5 rounded">
+    <div class="card p-5 my-5 is-rounded border">
       <div class="is-flex is-align-items-center is-justify-content-space-between">
         <div class="is-flex is-align-items-center is-justify-content-center">
           <div class="is-flex is-align-items-center is-justify-content-center mr-5">
@@ -1056,7 +1071,7 @@ function createCollegeTemplate(college: ICollege, courses: ICourse[]) {
       <div class="mt-5">
         <h3 class="is-size-4 has-text-weight-bold">Courses</h3>
         <ul class="is-flex is-flex-direction-column">
-          ${courseItems}
+          ${courseFinalTemplate}
         </ul>
         <button class="button is-primary mt-5">Add course</button>
       </div>
@@ -1068,7 +1083,7 @@ function createCollegeTemplate(college: ICollege, courses: ICourse[]) {
 function renderColleges() {
   if (states.colleges.length === 0) {
     collegeList.innerHTML = `
-      <div class="is-flex box is-justify-content-center is-align-items-center">
+      <div class="is-flex py-5 border is-rounded is-justify-content-center is-align-items-center">
         <h1 class="is-size-3">No colleges found</h1>
       </div>
     `;

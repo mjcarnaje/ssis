@@ -30,10 +30,14 @@ class CollegeService {
     const colleges = this.dsService.getDbFileContent<ICollege>("colleges");
     const courses = this.dsService.getDbFileContent<ICourse>("courses");
 
-    return colleges.map((college) => ({
-      ...college,
-      courses: courses.filter((course) => course.collegeId === college.id),
-    }));
+    return colleges
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((college) => ({
+        ...college,
+        courses: courses
+          .filter((course) => course.collegeId === college.id)
+          .sort((a, b) => a.name.localeCompare(b.name)),
+      }));
   };
 
   addCollege = async (_: Electron.IpcMainInvokeEvent, college: ICollege) => {

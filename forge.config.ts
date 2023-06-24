@@ -12,7 +12,7 @@ import { rendererConfig } from "./webpack.renderer.config";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: "./src/assets/icons/Square44x44Logo.targetsize-256.png",
+    icon: "src/assets/icons/icon.png",
   },
   rebuildConfig: {},
   makers: [
