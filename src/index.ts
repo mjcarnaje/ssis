@@ -4,7 +4,6 @@ import { CollegeService } from "./services/CollegeService";
 import { CourseService } from "./services/CourseService";
 import { DataStorageService } from "./services/DataStorageService";
 import { StudentService } from "./services/StudentService";
-import path from "path";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -18,10 +17,7 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 900,
     width: 1440,
-    icon: path.join(
-      __dirname,
-      "../assets/icons/Square44x44Logo.targetsize-256.png"
-    ),
+    icon: "/src/assets/icons/icon.png",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       webSecurity: false,

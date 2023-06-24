@@ -16,10 +16,21 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      iconUrl: "src/assets/icons/icon.png",
+      setupIcon: "src/assets/icons/icon.png",
+    }),
     new MakerZIP({}, ["darwin"]),
-    new MakerRpm({}),
-    new MakerDeb({}),
+    new MakerRpm({
+      options: {
+        icon: "src/assets/icons/icon.png",
+      },
+    }),
+    new MakerDeb({
+      options: {
+        icon: "src/assets/icons/icon.png",
+      },
+    }),
   ],
   plugins: [
     new AutoUnpackNativesPlugin({}),
