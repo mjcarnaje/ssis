@@ -16,7 +16,11 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      setupIcon: "src/assets/icons/icon.ico",
+      iconUrl:
+        "https://raw.githubusercontent.com/mjcarnaje/ssis/master/src/assets/icons/icon.ico",
+    }),
     new MakerZIP({}, ["darwin"]),
     new MakerRpm({
       options: {
